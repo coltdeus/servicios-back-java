@@ -1,0 +1,11 @@
+server :
+  port: 8183
+
+  spring:
+    cloud:
+      config:
+        uri: D:\Daniel.Peña\Documents\Entrega Final\config-data
+        searchpatch: config-data
+
+
+
