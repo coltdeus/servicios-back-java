@@ -30,17 +30,13 @@ dependencies {
 //	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 //	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 //	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	
-	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
-
-	//implementation 'io.springfox:springfox-swagger2:2.9.2'
-	//implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-	//implementation "io.springfox:springfox-boot-starter:3.0.0"
-	//compile "io.springfox:springfox-swagger-ui:3.0.0"
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

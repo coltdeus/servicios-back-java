@@ -1,6 +1,6 @@
 package com.pragma.customer.infrastructure.controller;
 
-import com.pragma.customer.application.utils.PersonalizedName;
+import com.pragma.customer.application.utils.PersonalizedNameCustomer;
 import com.pragma.customer.domain.dto.CustomerDto;
 import com.pragma.customer.domain.service.CustomerService;
 import io.swagger.annotations.Api;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping (value = PersonalizedName.REST_CONTROLLER)
+@RequestMapping (value = PersonalizedNameCustomer.REST_CONTROLLER)
 @Api(tags = { "Controlador customer"})
 public class CustomerController {
 
@@ -31,13 +31,13 @@ public class CustomerController {
     private CustomerService customerService;
 
 //---TODOS(COMPLETO)---
-    @GetMapping("/all")
-    @ApiOperation(PersonalizedName.REST_ALL)
+    @GetMapping(PersonalizedNameCustomer.REST_ALL)
+    @ApiOperation("consigue todos los customers")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 204, message = "no se encontraron clientes registrados")
     })
-    public ResponseEntity<List<CustomerDto>> getAll(){
+    public ResponseEntity<List<CustomerDto>> getAll() throws NotFoundException {
         List<CustomerDto> customerDtos = customerService.getAll();
         if(customerDtos.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -45,8 +45,8 @@ public class CustomerController {
         return new ResponseEntity<>(customerDtos, HttpStatus.OK);
     }
 
-//---IDENTIFICACION---
-    @GetMapping(PersonalizedName.REST_GET_IDENTIFICATION)
+//---ENCONTRAR IDENTIFICACION---
+    @GetMapping(PersonalizedNameCustomer.REST_GET_IDENTIFICATION)
     @ApiOperation("obtiene un cliente dado su tipo y numero de documento")
     @ApiResponse(code = 200, message = "OK")
     public ResponseEntity<CustomerDto> getIdentification(
@@ -57,7 +57,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerDto, HttpStatus.OK);
     }
 //---AÑO---
-    @GetMapping(PersonalizedName.REST_AGE)
+    @GetMapping(PersonalizedNameCustomer.REST_AGE)
     @ApiOperation("obtiene una lista de los clientes cuya edad sea mayor o igual a el parametro")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK"),
@@ -68,7 +68,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerDto, HttpStatus.OK);
     }
 //---GUARDAR---
-    @PostMapping(PersonalizedName.REST_SAVE)
+    @PostMapping(PersonalizedNameCustomer.REST_SAVE)
     @ApiOperation("guarda un cliente")
     @ApiResponse(code = 201, message = "CREATED")
     public ResponseEntity<CustomerDto> save (@RequestBody CustomerDto customerDto) throws NotFoundException {
@@ -84,7 +84,7 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 //---ELIMINAR---
-    @DeleteMapping(PersonalizedName.REST_DELETE)
+    @DeleteMapping(PersonalizedNameCustomer.REST_DELETE)
     @ApiOperation("elimina un cliente")
     @ApiResponse(code = 200, message = "OK")
     public ResponseEntity<CustomerDto> dalete(
@@ -94,8 +94,8 @@ public class CustomerController {
         customerService.delete(type, document);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-//---ELIMINAR2---
-    @DeleteMapping(PersonalizedName.REST_DELETE_CUSTOMER)
+//---ELIMINAR POR CUSTOMER---
+    @DeleteMapping(PersonalizedNameCustomer.REST_DELETE_CUSTOMER)
     @ApiOperation("elimina un cliente por el body")
     @ApiResponse(code = 200, message = "OK")
     public ResponseEntity<CustomerDto> daleteCustomer(@RequestBody CustomerDto customerDto) throws NotFoundException {

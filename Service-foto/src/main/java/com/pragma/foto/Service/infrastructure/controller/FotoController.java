@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class FotoController {
         return new ResponseEntity<>(fotoService.getCustomerId(customerId), HttpStatus.OK);
     }
 
-    @PatchMapping
+    @PostMapping
     public ResponseEntity<FotoDto> save(@RequestBody FotoDto fotoDto){
         fotoService.save(fotoDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -41,7 +42,7 @@ public class FotoController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping(PersonalizedName.REST_GET_CUSTOMERS_ID)
+    @PostMapping(PersonalizedName.REST_GET_CUSTOMERS_ID)
     public ResponseEntity<List<FotoDto>> getCustomerIds(@RequestBody List<Long> customerId) throws NotFoundException {
         return new ResponseEntity<>(fotoService.getCustomerIds(customerId), HttpStatus.OK);
     }

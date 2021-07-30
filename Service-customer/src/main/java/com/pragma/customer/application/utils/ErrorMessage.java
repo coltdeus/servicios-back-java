@@ -5,6 +5,7 @@ public class ErrorMessage {
     private static final String IDENTIFICACION_NO_REGISTRADA = "la identificacion %s: %d no esta registrada";
     private static final String IDENTIFICACION_YA_REGISTRADA = "la identificacion %s: %d ya esta registrada";
     private static final String SIN_CLIENTES_POR_EDAD = "no existen clientes con edad mayor o igual a %d";
+    public static final String NOT_FOUND_FOTO = "El cliente no tiene foto registrada";
 
     public static String identificacionNoRegistrada(String tipo, Integer numero) {
         return String.format(IDENTIFICACION_NO_REGISTRADA, tipo, numero);

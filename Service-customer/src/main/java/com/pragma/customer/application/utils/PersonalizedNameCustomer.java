@@ -1,6 +1,6 @@
 package com.pragma.customer.application.utils;
 
-public class PersonalizedName {
+public class PersonalizedNameCustomer {
     public static final String REST_CONTROLLER="/customers";
     public static final String REST_ALL="/all";
     public static final String REST_AGE="/age/{age}";

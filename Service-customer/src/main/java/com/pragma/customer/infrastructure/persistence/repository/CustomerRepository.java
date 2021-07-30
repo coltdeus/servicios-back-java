@@ -19,55 +19,37 @@ public class CustomerRepository implements  CustomerRepositoryInterface {
 
     @Autowired
     private CustomerCrudRepository customerCrudRepository;
-
+//---TODOS LOS CUSTOMERS---
     @Override
-    public List<CustomerDto> getAll() {
-        List<CustomerEntity> customerEntities = (List<CustomerEntity>)
-                customerCrudRepository.findAll();
-        return customerMapper.toCustomerDtos(customerEntities);
-        //return customerCrudRepository.findAll();
+    public List<CustomerEntity> getAll() {
+        return (List<CustomerEntity>) customerCrudRepository.findAll();
     }
-
+//---ENCONTRAR CUSTOMER---
     @Override
-    public Optional<List<CustomerDto>> ageGreaterThanOrEqual(Integer age) {
-        //return Optional.empty();
-        return customerCrudRepository.findByAgeGreaterThanEqual(age)
-                .map(cust -> customerMapper.toCustomerDtos(cust));
+    public Optional<List<CustomerEntity>> ageGreaterThanOrEqual(Integer age) {
+        return customerCrudRepository.findByAgeGreaterThanEqual(age);
     }
-
+//---GUARDAR CUSTOMER---
     @Override
-    public void save(CustomerDto customerDto) {
-        CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerDto);
+    public void save(CustomerEntity customerEntity) {
         customerCrudRepository.save(customerEntity);
     }
-
+///---ELIMINAR CUSTOMER---
     @Override
-    public void delete(CustomerDto customerDto) {
-        CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerDto);
+    public void delete(CustomerEntity customerEntity) {
         customerCrudRepository.delete(customerEntity);
     }
-
+//---CUSTOMER DE SU ID---
     @Override
-    public Optional<CustomerDto> getCustomerId(Long id) {
-        Optional<CustomerEntity> customerEntities = customerCrudRepository.findById(id);
-        return customerEntities.map(cust -> customerMapper.toCustomerDto(cust));
+    public Optional<CustomerEntity> getCustomerId(Long id) {
+        return customerCrudRepository.findById(id);
     }
-
+//---CUSTOMER CON EL ID DE SU IDENTIFICACION CORRESPONDIENTE---
     @Override
-    public Optional<CustomerDto> customerIdentification(Long id) {
-        //Optional<CustomerEntity> customerEntity = customerCrudRepository.customerIdentification(id);
+    public Optional<CustomerEntity> customerIdentification(Long id) {
         Long customerId = customerCrudRepository.customerIdentification(id);
         Optional<CustomerEntity> customerEntity = customerCrudRepository.findById(customerId);
-        //return Optional.empty();
-        //return customerEntity.map(cust -> customerMapper.toCustomerDto(cust));
-        return customerEntity.map(cus -> customerMapper.toCustomerDto(cus));
-        //return customerMapper.toCustomerDto(customerEntity.get());
-    }
-
-    public Optional<CustomerDto> getCustomerIdentification(Long idIdentification) {
-        Optional<CustomerEntity> customerEntities = customerCrudRepository
-                .findById(idIdentification);
-        return customerEntities.map(cust -> customerMapper.toCustomerDto(cust));
+        return customerEntity;
     }
 
 }

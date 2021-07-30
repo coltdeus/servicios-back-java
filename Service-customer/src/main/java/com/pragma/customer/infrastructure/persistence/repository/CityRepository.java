@@ -31,17 +31,10 @@ public class CityRepository implements CityRepositoryInterface {
         CityEntity cityEntity = cityMapper.toCityEntity(cityDto);
         cityCrudRepository.save(cityEntity);
     }
-    /**
 
-    @Override
-    public Optional<CityEntity> findName(String name) {
-        //return Optional.empty();
-        return cityCrudRepository.findByName(name);
+    public Optional<CityEntity> renEntity(String name){
+        Optional<CityEntity> cityEntity = cityCrudRepository.findByName(name);
+        return cityEntity;
     }
 
-    @Override
-    public void save(CityEntity cityEntity) {
-        cityCrudRepository.save(cityEntity);
-    }
-    */
 }

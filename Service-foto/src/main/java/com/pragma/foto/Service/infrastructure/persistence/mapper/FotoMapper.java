@@ -17,15 +17,6 @@ public class FotoMapper {
     @Autowired
     private FotoCrudInterface fotoCrudInterface;
 
-    /**
-    FotoDto toFotoDto(FotoEntity fotoEntity);
-    List<FotoDto> toFotoDtos(List<FotoEntity> fotoEntity);
-
-    @InheritInverseConfiguration
-    @Mapping(target = "id", ignore = true)
-    FotoEntity toFotoEntity(FotoDto fotoDto);
-    */
-
     public FotoDto entityToDomain(FotoEntity fotoEntity) {
         return FotoDto.builder()
                 .clienteId(fotoEntity.getCustomerId())

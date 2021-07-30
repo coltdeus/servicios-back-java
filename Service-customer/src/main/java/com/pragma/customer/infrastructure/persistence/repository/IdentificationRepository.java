@@ -3,6 +3,7 @@ package com.pragma.customer.infrastructure.persistence.repository;
 import com.pragma.customer.domain.dto.IdentificationDto;
 import com.pragma.customer.domain.repository.IdentificationRepositoryInterface;
 import com.pragma.customer.infrastructure.persistence.crud.IdentificationCrudRepository;
+import com.pragma.customer.infrastructure.persistence.entity.CityEntity;
 import com.pragma.customer.infrastructure.persistence.entity.IdentificationEntity;
 import com.pragma.customer.infrastructure.persistence.mapper.IdentificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,22 +46,9 @@ public class IdentificationRepository implements IdentificationRepositoryInterfa
             System.out.println("se daño" + e);
         }
     }
-    /**
 
-    @Override
-    public Optional<IdentificationEntity> findNumberAndType(Integer number, String type) {
-        //return Optional.empty();
-        return identificationCrudRepository.findByNumberAndType(number, type);
+    public Optional<IdentificationEntity> renEntity(Integer number, String Type){
+        Optional<IdentificationEntity> identificationEntity = identificationCrudRepository.findByNumberAndType(number, Type);
+        return  identificationEntity;
     }
-
-    @Override
-    public void save(IdentificationEntity identificationEntity) {
-        identificationCrudRepository.save(identificationEntity);
-    }
-
-    @Override
-    public void delete(IdentificationEntity identificationEntity) {
-        identificationCrudRepository.delete(identificationEntity);
-    }
-    */
 }

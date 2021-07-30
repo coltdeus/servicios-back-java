@@ -1,5 +1,6 @@
 package com.pragma.customer.infrastructure.persistence.entity;
 
+import com.pragma.customer.domain.dto.FotoDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
@@ -50,5 +52,8 @@ public class CustomerEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private CityEntity cityEntity;
+
+    //@Transient
+    //private FotoDto fotoDto;
 
 }
