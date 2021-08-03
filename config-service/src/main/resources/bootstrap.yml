@@ -1,20 +1,18 @@
 server :
   port: 8183
 
-  spring:
-    cloud:
-      config:
-        uri: https://github.com/coltdeus/servicios-back-java.git
-        searchPatch: config-data
-        username: ${GIT_USER}
-        password: ${GIT_PASSWORD}
-    security:
-      user:
-        name: root
-        password: s3cr3t
-
-
-
-
-
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/coltdeus/servicios-back-java.git
+          searchPaths: config-data
+          username: ${GIT_USER}
+          password: ${GIT_PASSWORD}
+          default-label: "main"
+  security:
+    user:
+      name: root
+      password: s3cr3t
 
