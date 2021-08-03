@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,7 +30,8 @@ public class IdentificationEntity implements Serializable {
     private Long id;
     @NotEmpty(message = "el tipo no puede estar vacio")
     private String type;
-    @NotEmpty(message = "el documento no puede estar vacio")
+    //@NotEmpty(message = "el documento no puede estar vacio")
+    @NonNull
     @Positive(message = "la cedula debe ser mayor que cero")
     private Integer number;
 

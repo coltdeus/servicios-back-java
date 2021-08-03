@@ -73,8 +73,8 @@ public class CustomerService {
     public void save(CustomerDto customerDto) throws NotFoundException {
         if(identificationService.exist(
                 customerDto.getIdentificationDto().getType(),
-                customerDto.getIdentificationDto().getDocument()
-        )){
+                customerDto.getIdentificationDto().getDocument())
+        ){
             //throw new IllegalArgumentException("El Customer ya se encuentra creado(SAVE)");
             throw new IllegalArgumentException(ErrorMessage.identificacionYaRegistrada(
                     customerDto.getIdentificationDto().getType(),
@@ -84,13 +84,9 @@ public class CustomerService {
         //---CIUDAD---
         CityDto cityDto = cityService.save(customerDto.getCityDto().getName());
         //---IDENTIFICATION---
-        identificationService.save(
+        IdentificationDto identificationDto = identificationService.save(
                 customerDto.getIdentificationDto().getType(),
                 customerDto.getIdentificationDto().getDocument()
-        );
-        IdentificationDto identificationDto = identificationService.findByNumberAndType(
-                customerDto.getIdentificationDto().getDocument(),
-                customerDto.getIdentificationDto().getType()
         );
         //---CUSTOMER---
         CityEntity cityEntity = cityService.renEntity(customerDto.getCityDto().getName());
@@ -104,12 +100,11 @@ public class CustomerService {
                 .build();
         customerRepositoryInterface.save(customerEntity);
         //---FOTO---
-        fotoRest.save(
-                FotoDto.builder()
-                        .customerId(customerEntity.getId())
-                        .foto(customerDto.getFoto())
-                        .build()
-        );
+        FotoDto fotoDto = FotoDto.builder()
+                .customerId(customerEntity.getId())
+                .foto(customerDto.getFoto())
+                .build();
+        fotoRest.save(fotoDto);
     }
 
     public void update(CustomerDto customerDto) throws NotFoundException {
@@ -140,6 +135,11 @@ public class CustomerService {
         myCustomer.get().setIdentificationEntity(identificationEntity);
         customerRepositoryInterface.save(myCustomer.get());
         //---FOTO---
+        FotoDto fotoDto = FotoDto.builder()
+                .customerId(myCustomer.get().getId())
+                .foto(customerDto.getFoto())
+                .build();
+        fotoRest.save(fotoDto);
     }
 
     public void deleteCustomer(CustomerDto customerDto) throws NotFoundException {
@@ -156,10 +156,11 @@ public class CustomerService {
                 customerDto.getIdentificationDto().getDocument(),
                 customerDto.getIdentificationDto().getType()
         );
-        Optional<CustomerEntity> myCustomer = customerRepositoryInterface.customerIdentification(identificationDto.getId());
+        Optional<CustomerEntity> myCustomer = customerRepositoryInterface.customerIdentification(
+                identificationDto.getId());
+        customerRepositoryInterface.delete(myCustomer.get());
         identificationService.delete(identificationDto);
         fotoRest.delete(myCustomer.get().getId());
-        customerRepositoryInterface.delete(myCustomer.get());
     }
 
     public void delete(String type, Integer document) throws NotFoundException {

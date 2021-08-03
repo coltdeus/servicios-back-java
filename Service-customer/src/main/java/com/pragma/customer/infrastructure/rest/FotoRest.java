@@ -21,7 +21,7 @@ public interface FotoRest {
     @GetMapping(PersonalizedNameFoto.REST_GET_CUSTOMER_ID)
     public ResponseEntity<FotoDto> getCustomerId(@PathVariable Long customerId) throws NotFoundException;
 
-    @PostMapping
+    @PostMapping(PersonalizedNameFoto.REST_PUT_CUSTOMERS_FOTO)
     public ResponseEntity<FotoDto> save(@RequestBody FotoDto fotoDto);
 
     @DeleteMapping(PersonalizedNameFoto.REST_DELETE)
@@ -29,5 +29,4 @@ public interface FotoRest {
 
     @PostMapping(PersonalizedNameFoto.REST_GET_CUSTOMERS_ID)
     public ResponseEntity<List<FotoDto>> getCustomerIds(@RequestBody List<Long> customerId) throws NotFoundException;
-
 }

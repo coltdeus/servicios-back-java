@@ -4,8 +4,17 @@ server :
   spring:
     cloud:
       config:
-        uri: D:\Daniel.Peña\Documents\Entrega Final\config-data
-        searchpatch: config-data
+        uri: https://github.com/coltdeus/servicios-back-java.git
+        searchPatch: config-data
+        username: ${GIT_USER}
+        password: ${GIT_PASSWORD}
+    security:
+      user:
+        name: root
+        password: s3cr3t
+
+
+
 
 
 

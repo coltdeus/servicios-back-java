@@ -19,18 +19,18 @@ public class FotoMapper {
 
     public FotoDto entityToDomain(FotoEntity fotoEntity) {
         return FotoDto.builder()
-                .clienteId(fotoEntity.getCustomerId())
+                .customerId(fotoEntity.getCustomerId())
                 .foto(fotoEntity.getFoto())
                 .build();
     }
 
     public FotoEntity domainToEntity(FotoDto fotoDto) {
-        Optional<FotoEntity> fotoEntidadOptional = fotoCrudInterface.findByCustomerId(fotoDto.getClienteId());
+        Optional<FotoEntity> fotoEntidadOptional = fotoCrudInterface.findByCustomerId(fotoDto.getCustomerId());
         if (fotoEntidadOptional.isEmpty()) {
             fotoEntidadOptional = Optional.of(FotoEntity.builder().build());
         }
         fotoEntidadOptional.get().setFoto(fotoDto.getFoto());
-        fotoEntidadOptional.get().setCustomerId(fotoDto.getClienteId());
+        fotoEntidadOptional.get().setCustomerId(fotoDto.getCustomerId());
         return fotoEntidadOptional.get();
     }
 

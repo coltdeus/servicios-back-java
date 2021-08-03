@@ -24,17 +24,13 @@ public class CustomerRepositoryMockTest {
 
     @Test
     public void whenFindAge_thenResturnListCustomers(){
-
-
         IdentificationEntity identificationPrueba1 = IdentificationEntity.builder()
-                .id(4L)
+                //.id(4L)
                 .number(60404116)
                 .type("CC")
                 .build();
         identificationCrudRepository.save(identificationPrueba1);
-
         //CityEntity cityPrueba1 = CityEntity.builder().id(1L).build();
-
         CustomerEntity customerPrueba1 = CustomerEntity.builder()
                 .age(40)
                 .lastName("rodriguez")
@@ -44,12 +40,8 @@ public class CustomerRepositoryMockTest {
                 .build();
         customerCrudRepository.save(customerPrueba1);
         //IdentificationEntity.builder().id(4L).build()
-
+        //Optional<List<CustomerEntity>> founds = customerCrudRepository.findByAgeGreaterThanEqual(18);
         Optional<List<CustomerEntity>> founds = customerCrudRepository.findByAgeGreaterThanEqual(18);
-
-        Assertions.assertThat(founds.get().size()).isEqualTo(4);
-
-
-
+        Assertions.assertThat(founds.get().size()).isEqualTo(5);
     }
 }

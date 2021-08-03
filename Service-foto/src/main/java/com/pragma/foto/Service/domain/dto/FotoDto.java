@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class FotoDto {
-    Long clienteId;
+    Long customerId;
     String foto;
 }
